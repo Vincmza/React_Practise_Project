@@ -1,0 +1,22 @@
+.lmj-plant-item-cover {
+	height: 220px;
+	width: 220px;
+	border-radius: 20px;
+}
+.lmj-plant-item {
+	position: relative;
+	margin: 10px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-direction: column;
+	text-transform: capitalize;
+}
+.sun {
+	color : #dbc21f;
+	font-size: 1.3em;	
+}
+.water {
+	color: #587ded;
+	font-size: 1.3em;
+}

@@ -1,6 +1,6 @@
 import React from "react";
+import PlantItem from "./PlantItem";
 import { plantList } from "../datas/plantList";
-import { FaFireAlt } from "react-icons/fa";
 import "../styles/ShoppingList.css"
 
 const ShoppingList = () => {
@@ -9,7 +9,7 @@ const ShoppingList = () => {
         const rowData = {
             category: element.category,
         };
-        if (!categories.find((category) => rowData.category == category.category)) {
+        if (!categories.find((category) => rowData.category === category.category)) {
             categories.push(rowData);
         }
     });
@@ -21,12 +21,16 @@ const ShoppingList = () => {
                 ))}
             </ul>
             <ul className="lmj-plant-list">
-                {plantList.map((plant) => (
-                    <li key={plant.id} className="lmj-plant-item">
-                        {plant.name}
-                        {plant.isBestSale ? <span><FaFireAlt/></span> : null}
-                        {plant.isSpecialOffer && <div className="lmj-sales">Soldes</div>}
-                    </li>
+                {plantList.map(({id, cover, name, water, light, isSpecialOffer, price}) => (
+                    <PlantItem
+                        id={id}
+                        cover={cover}
+                        name={name}
+                        water={water}
+                        light={light}
+                        offer={isSpecialOffer && <div className="lmj-sales">Soldes</div>}
+                        price={<div className="lmj-price">{price}€</div>}                  
+                    />
                 ))}
             </ul>
         </div>
