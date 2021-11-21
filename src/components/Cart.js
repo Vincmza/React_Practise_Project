@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "../styles/Cart.css";
 
-const Cart = () => {
-    const [cart, updateCart] = useState(0);
+const Cart = ({cart, updateCart}) => {
     const [isOpen, setIsOpen] = useState(false);
-    let monstera = 8;
+    const total = cart.reduce((acc, plantType)=> acc + plantType.amount * plantType.price, 0)
 
     return isOpen ? (
         <div className="lmj-cart">
@@ -12,12 +11,16 @@ const Cart = () => {
                 Fermer le panier
             </button>
             <h2>Panier</h2>
-            <div>
-                <div>Monstera : ${monstera}€</div>
-                <button onClick={() => updateCart(cart + 1)}>Ajouter</button>
-            </div>
-            <h3>Panier : {monstera * cart}€</h3>
-            <button onClick={() => updateCart(0)}>Vider le Panier</button>
+            <ul>
+                {cart.map(({name, price, amount}, index)=>(
+                    <div key={`${name}-${index}`}>
+                        {name} : {price} X {amount}
+
+                    </div>
+                ))}
+            </ul>           
+            <h3>Total : {total}</h3>
+            <button onClick={() => updateCart([])}>Vider le Panier</button>
         </div>
     ) : (
         <div className="lmj-cart-closed">
