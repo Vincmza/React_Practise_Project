@@ -6,15 +6,7 @@ import "../styles/ShoppingList.css";
 
 const ShoppingList = ({ cart, updateCart }) => {
     const [activeCategory, setActiveCategory] = useState("");
-    // const categories = [];
-    // plantList.forEach((element) => {
-    //     const rowData = {
-    //         category: element.category,
-    //     };
-    //     if (!categories.find((category) => rowData.category === category.category)) {
-    //         categories.push(rowData);
-    //     }
-    // });
+    
     const categories = plantList.reduce(
 		(acc, plant) =>
 			acc.includes(plant.category) ? acc : acc.concat(plant.category),
@@ -31,6 +23,13 @@ const ShoppingList = ({ cart, updateCart }) => {
         } else {
             updateCart([...cart, { name, price, amount: 1 }]);
         }
+    }
+    function removeFromCart(name){
+        const plantFound = cart.find((plant)=> plant.name === name)
+        if(plantFound){
+            plantFound.amount -= 1
+        }
+        updateCart([...cart])
     }
     return (
         <div className="shopping-container">
@@ -55,6 +54,9 @@ const ShoppingList = ({ cart, updateCart }) => {
                             />
                             <button className="add-button" onClick={() => addToCart(name, price)}>
                                 Ajouter
+                            </button>
+                            <button className="remove-button" onClick={() => removeFromCart(name)}>
+                                Retirer
                             </button>
                             </div>
 
